@@ -144,8 +144,11 @@ export default defineComponent({
 # 安装依赖
 $ yarn install
 
-# 启动 storybook
-$ yarn storybook
+# 启动文件监听
+$ yarn watch
+
+# 启动示例
+$ yarn workspace @zhengxs/vue-hooks-examples run dev
 
 # 构建 typedoc 文档
 $ yarn typedoc

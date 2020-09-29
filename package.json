@@ -5,9 +5,8 @@
   "description": "",
   "keywords": [
     "vue",
-    "vue2",
     "vue3",
-    "hooks"
+    "vue-hooks"
   ],
   "scripts": {
     "build": "tsc -b ",
