@@ -9,7 +9,8 @@
     "vue",
     "vue2",
     "vue3",
-    "hooks"
+    "hooks",
+    "vue-hooks"
   ],
   "files": [
     "dist"
