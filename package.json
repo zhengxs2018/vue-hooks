@@ -1,15 +1,8 @@
 {
-  "name": "@zhengxs/vue-hooks",
   "private": true,
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [
-    "vue",
-    "vue3",
-    "vue-hooks"
-  ],
   "scripts": {
-    "build": "tsc -b ",
+    "build": "father build",
+    "dev": "yarn workspace @zhengxs/vue-hooks-examples dev",
     "watch": "tsc -b -w --preserveWatchOutput",
     "test": "jest",
     "cov": "jest --coverage",
@@ -19,14 +12,8 @@
     "commit": "git-cz",
     "typedoc": "typedoc --options typedoc.js packages/vue-hooks",
     "release": "cross-env HUSKY_BYPASS=true lerna publish from-git --yes",
-    "canary": "cross-env HUSKY_BYPASS=true lerna publish --canary --npm-tag=next --yes",
-    "preversion": "npm run lint && npm run test",
-    "prepublishOnly": "npm run build"
+    "canary": "cross-env HUSKY_BYPASS=true lerna publish --canary --npm-tag=next --yes"
   },
-  "files": [
-    "dist",
-    "LICENSE.txt"
-  ],
   "workspaces": [
     "packages/*"
   ],
@@ -34,7 +21,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,json}": [
+    "*.{js,vue,ts,tsx,json}": [
       "prettier --write"
     ]
   },
@@ -49,10 +36,12 @@
   "devDependencies": {
     "@types/jest": "^25.1.5",
     "@types/node": "^13.11.0",
+    "babel-plugin-transform-async-to-promises": "^0.8.15",
     "commitizen": "^4.0.3",
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.1.0",
     "cz-customizable": "^6.2.0",
+    "father": "^2.29.10",
     "globby": "^11.0.0",
     "jest": "^25.2.7",
     "lerna": "^3.20.2",

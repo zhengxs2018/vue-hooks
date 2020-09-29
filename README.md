@@ -148,7 +148,7 @@ $ yarn install
 $ yarn watch
 
 # 启动示例
-$ yarn workspace @zhengxs/vue-hooks-examples run dev
+$ yarn dev
 
 # 构建 typedoc 文档
 $ yarn typedoc

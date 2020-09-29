@@ -4,19 +4,29 @@
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "browser": "./dist/index.browser.js",
   "types": "./dist/index.d.ts",
   "keywords": [
     "vue",
     "vue3",
     "vue-hooks"
   ],
+  "sideEffects": false,
   "files": [
     "dist"
   ],
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "axios": "^0.20.0",
+    "better-mock": "^0.2.8",
+    "path-to-regexp": "^6.1.0",
+    "tslib": "^1.9.0",
+    "vue": "^3.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
     "@vue/reactivity": "^3.0.0",
     "axios": "^0.20.0",
     "better-mock": "^0.2.8",
