@@ -75,10 +75,10 @@ export default {
 
 ### 在 vue2 中使用
 
-在 **vue2** 中模块路径改成 `@zhengxs/vue-hooks/vue`
+在 **vue2** 中模块路径改成 `@zhengxs/vue-hooks/vue2`
 
 ```typescript
-import { useList, useAxios, List, ListChangeMode } from '@zhengxs/vue-hooks/vue'
+import { useList, useAxios, List, ListChangeMode } from '@zhengxs/vue-hooks/vue2'
 
 import { request } from '@/lib/http'
 import type { User } from '@/interfaces/user'
