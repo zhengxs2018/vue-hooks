@@ -7,9 +7,7 @@
   "types": "./dist/index.d.ts",
   "keywords": [
     "vue",
-    "vue2",
     "vue3",
-    "hooks",
     "vue-hooks"
   ],
   "files": [
@@ -26,7 +24,6 @@
     "tslib": "^1.9.0",
     "vue": "^3.0.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/zhengxs2018/vue-hooks"
