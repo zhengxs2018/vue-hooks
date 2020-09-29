@@ -1,134 +1,134 @@
 # @zhengxs/vue-hooks
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+Vue Hooks Library.
 
-基础 vue3.x 开发的 hooks 插件，兼容 vue2.x 版本.
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) | [![NPM version][image-1]][1] | [![NPM downloads][image-2]][2]
 
-## 安装
+基础 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
+
+## 📦 安装
 
 ```bash
 $ npm install @zhengxs/vue-hooks --save
 ```
 
-## 使用
+## 🔨 使用
 
-### 在 vue3 中使用
+封装业务接口
 
 ```typescript
-import { reactive, onBeforeMount } from 'vue'
+import type { AxiosRequestConfig } from 'axios'
 
-import { useList, useAxios, List, ListChangeMode } from '@zhengxs/vue-hooks'
+import { reactive } from 'vue'
 
-import { request } from '@/lib/http'
-import type { User } from '@/interfaces/user'
+import { useAxios, useList, List } from '@zhengxs/vue-hooks'
 
-export interface UseUserListOptions {
-  mode?: ListChangeMode
-  silent?: boolean
-}
+import { request } from '../../lib/http'
+import type { User } from '../../interfaces/user'
 
-export interface UserRequestParams extends LoadArgs {
-  nickname: string
-}
+import { UseUserListOptions, UserListQuery, UserListParams } from './types'
 
 export function useUserList(options: UseUserListOptions = {}) {
-  const query = reactive<{ nickname: string }>({
-    nickname: '',
-  })
-
-  const service = (params: UserRequestParams, config: AxiosRequestConfig) => {
+  const service = (params: UserListParams, config: AxiosRequestConfig) => {
     return request({ ...config, url: '/api/user/list', params })
   }
 
-  const http = useAxios<List<User>, UserRequestParams>(service, {
+  const { loading, error, run, cancel } = useAxios<List<User>, UserListParams>(service, {
     silent: options.silent,
     unique: true,
   })
 
+  const query = reactive<UserListQuery>({
+    nickname: '',
+  })
+
   const list = useList<User>({
+    loading: loading,
     mode: options.mode,
-    loading: http.loading,
-    dispatchRequest(args) {
-      return http.run({ ...args, ...query })
+    autoLoad: options.autoLoad,
+    onFetch(args) {
+      return run({ ...args, nickname: query.nickname })
     },
   })
 
-  return { query, ...http, ...list }
-}
-
-export default {
-  setup() {
-    const userList = useUserList((params, config) => {
-      return request({ ...config, url: '/api/user/list', params })
-    })
-
-    onBeforeMount(() => {
-      userList.refresh()
-    })
-
-    return {
-      userList
-    }
+  return {
+    ...list,
+    loading,
+    error,
+    query,
+    cancel
   }
 }
+
 ```
 
-### 在 vue2 中使用
-
-在 **vue2** 中模块路径改成 `@zhengxs/vue-hooks/vue2`
+在组件中使用
 
 ```typescript
-import { useList, useAxios, List, ListChangeMode } from '@zhengxs/vue-hooks/vue2'
+import { FunctionalComponent as FC, defineComponent, watch } from 'vue'
 
-import { request } from '@/lib/http'
-import type { User } from '@/interfaces/user'
+import { Alert, Input, Table } from 'ant-design-vue'
 
-export interface UseUserListOptions {
-  mode?: ListChangeMode
-  silent?: boolean
-}
+import { useUserList } from '../hooks/useUserList/index'
 
-export interface UserRequestParams extends LoadArgs {
-  nickname: string
-}
-
-export function useUserList(options: UseUserListOptions = {}) {
-  const query = {
-    nickname: '',
-  }
-
-  const service = (params: UserRequestParams, config: AxiosRequestConfig) => {
-    return request({ ...config, url: '/api/user/list', params })
-  }
-
-  const http = useAxios<List<User>, UserRequestParams>(service, {
-    silent: options.silent,
-    unique: true,
+export const TableList: FC = () => {
+  const { loading, error, query, items, page, pageSize, total, search, loadPageData, toJSON } = useUserList({
+    autoLoad: true
   })
 
-  const list = useList<User>({
-    mode: options.mode,
-    loading: http.loading,
-    dispatchRequest(args) {
-      return http.run({ ...args, ...query })
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id'
     },
-  })
-
-  return { query, ...http, ...list }
-}
-
-export default {
-  data() {
-    return {
-      userList: useUserList((params, config) => {
-        return request({ ...config, url: '/api/user/list', params })
-      })
+    {
+      title: '昵称',
+      dataIndex: 'nickname',
+      key: 'nickname'
     }
-  },
-  created() {
-    this.userList.refresh()
+  ]
+
+  const pagination: any = {
+    current: page,
+    pageSize: pageSize,
+    total: total,
+    onChange(page: number) {
+      return loadPageData(page, { force: true })
+    },
+    onShowSizeChange(_: number, pageSize: number) {
+      return search({ page: 1, pageSize })
+    }
   }
+
+  watch(
+    () => {
+      return items.value
+    },
+    () => {
+      console.log(toJSON())
+    }
+  )
+
+  return () => (
+    <>
+      {error.value && <Alert type="error" message="加载错误" description={error.value.message} closable />}
+      <Input
+        value={query.nickname}
+        placeholder="回车搜索"
+        onInput={(evt) => (query.nickname = (evt.target as HTMLInputElement).value.trim())}
+        // @ts-ignore
+        onPressEnter={() => search()}
+      />
+      <Table loading={loading.value} columns={columns} dataSource={items.value} rowKey="id" pagination={pagination} />
+    </>
+  )
 }
+
+export default defineComponent({
+  name: 'TableList',
+  setup: TableList
+})
 ```
 
 ## 开发步骤
@@ -196,3 +196,7 @@ See [CHANGELOG.md](./CHANGELOG.md)
 See [CONTRIBUTING.md](./.github/CONTRIBUTING.md)
 
 [nodejs]: https://nodejs.org
+
+
+[image-1]: https://img.shields.io/npm/v/@zhengxs/vue-hooks.svg?style=flat
+[image-2]: https://img.shields.io/npm/dm/@zhengxs/vue-hooks.svg?style=flat
