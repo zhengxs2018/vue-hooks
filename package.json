@@ -10,16 +10,15 @@
     "hooks"
   ],
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc -b ",
     "watch": "tsc -b -w --preserveWatchOutput",
     "test": "jest",
     "cov": "jest --coverage",
     "ci": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-    "format": "prettier --write \"**/*.{js,ts,tsx,json}\"",
-    "lint": "prettier --check \"**/*.{js,ts,tsx,json}\"",
+    "format": "prettier --write \"**/*.{js,vue,ts,tsx,json}\"",
+    "lint": "prettier --check \"**/*.{js,vue,ts,tsx,json}\"",
     "commit": "git-cz",
     "typedoc": "typedoc --options typedoc.js packages/vue-hooks",
-    "clean": "rimraf packages/**/dist packages/**/tsconfig.tsbuildinfo",
     "release": "cross-env HUSKY_BYPASS=true lerna publish from-git --yes",
     "canary": "cross-env HUSKY_BYPASS=true lerna publish --canary --npm-tag=next --yes",
     "preversion": "npm run lint && npm run test",
@@ -48,7 +47,6 @@
       "config": "./cz-config.js"
     }
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^25.1.5",
     "@types/node": "^13.11.0",
@@ -61,7 +59,6 @@
     "lerna": "^3.20.2",
     "lint-staged": "^10.1.1",
     "prettier": "^2.0.2",
-    "rimraf": "^3.0.2",
     "ts-jest": "^25.3.0",
     "ts-node": "^8.8.2",
     "typedoc": "^0.17.4",

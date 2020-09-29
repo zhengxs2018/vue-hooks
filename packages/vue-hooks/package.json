@@ -1,10 +1,10 @@
 {
   "name": "@zhengxs/vue-hooks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
-  "main": "./dist/vue-hooks.js",
-  "module": "./dist/vue-hooks.esm.js",
-  "types": "./dust/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "keywords": [
     "vue",
     "vue2",
@@ -18,7 +18,12 @@
     "access": "public"
   },
   "dependencies": {
-    "tslib": "^1.9.0"
+    "@vue/reactivity": "^3.0.0",
+    "axios": "^0.20.0",
+    "better-mock": "^0.2.8",
+    "path-to-regexp": "^6.1.0",
+    "tslib": "^1.9.0",
+    "vue": "^3.0.0"
   },
   "devDependencies": {},
   "repository": {

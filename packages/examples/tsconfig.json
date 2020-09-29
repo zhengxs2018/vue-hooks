@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "esnext",
+    "module": "esnext",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "composite": true,
+    "importHelpers": true /* Import emit helpers from 'tslib'. */,
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "strictBindCallApply": true,
+
+    /* JSX */
+    "jsx": "preserve",
+    "jsxFactory": "h",
+
+    /* Additional Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
+
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
+    "isolatedModules": true,
+
+    /* Advanced Options */
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
+
+    /* 拓展 */
+    "lib": ["ESNext", "dom"],
+
+    /* 实验支持  */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    /* Cli Options */
+    "pretty": true,
+    "noEmitOnError": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
