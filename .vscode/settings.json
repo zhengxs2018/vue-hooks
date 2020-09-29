@@ -1,0 +1,41 @@
+{
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "grunt.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "search.followSymlinks": false,
+  "search.exclude": {
+    "**/.tsbuildinfo": true,
+    "**/.tsbuildinfo.*": true,
+    "**/.history": true,
+    "**/yarn.lock": true,
+    "**/package.json": true,
+    "**/*.map": true,
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/tsconfig.tsbuildinfo": true
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1500,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.history": true,
+    "**/tsconfig.tsbuildinfo": true
+  },
+  "files.watcherExclude": {
+    "**/.history/**": true,
+    "**/build/**": true
+  },
+  "editor.minimap.enabled": false,
+  "cSpell.words": [
+    "compat",
+    "typedoc"
+  ],
+  "cSpell.ignoreWords": [],
+  "cSpell.ignorePaths": [".history", ".vscode", "package-lock.json", "yarn.lock"]
+}

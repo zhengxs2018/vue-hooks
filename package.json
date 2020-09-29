@@ -1,0 +1,76 @@
+{
+  "name": "@zhengxs/vue-hooks",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [
+    "vue",
+    "vue2",
+    "vue3",
+    "hooks"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -b -w --preserveWatchOutput",
+    "test": "jest",
+    "cov": "jest --coverage",
+    "ci": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json}\"",
+    "lint": "prettier --check \"**/*.{js,ts,tsx,json}\"",
+    "commit": "git-cz",
+    "typedoc": "typedoc --options typedoc.js packages/vue-hooks",
+    "clean": "rimraf packages/**/dist packages/**/tsconfig.tsbuildinfo",
+    "release": "cross-env HUSKY_BYPASS=true lerna publish from-git --yes",
+    "canary": "cross-env HUSKY_BYPASS=true lerna publish --canary --npm-tag=next --yes",
+    "preversion": "npm run lint && npm run test",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist",
+    "LICENSE.txt"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json}": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": "./cz-config.js"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^25.1.5",
+    "@types/node": "^13.11.0",
+    "commitizen": "^4.0.3",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.1.0",
+    "cz-customizable": "^6.2.0",
+    "globby": "^11.0.0",
+    "jest": "^25.2.7",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.1.1",
+    "prettier": "^2.0.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.3.0",
+    "ts-node": "^8.8.2",
+    "typedoc": "^0.17.4",
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "node": ">= 12.x",
+    "npm": ">= 6.x"
+  },
+  "author": "zhengxs2018 <zhengxs2018@foxmail.com>",
+  "license": "MIT"
+}
