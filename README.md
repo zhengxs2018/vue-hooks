@@ -2,7 +2,10 @@
 
 Vue Hooks Library.
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) | [![NPM version][image-1]][1] | [![NPM downloads][image-2]][2]
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![NPM version](https://img.shields.io/npm/v/@zhengxs/vue-hooks.svg?style=flat)
+![NPM downloads](https://img.shields.io/npm/dm/@zhengxs/vue-hooks.svg?style=flat)
+![License](https://img.shields.io/npm/l/@nrwl/workspace.svg?style=flat-square)
 
 基础 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
 
@@ -196,7 +199,3 @@ See [CHANGELOG.md](./CHANGELOG.md)
 See [CONTRIBUTING.md](./.github/CONTRIBUTING.md)
 
 [nodejs]: https://nodejs.org
-
-
-[image-1]: https://img.shields.io/npm/v/@zhengxs/vue-hooks.svg?style=flat
-[image-2]: https://img.shields.io/npm/dm/@zhengxs/vue-hooks.svg?style=flat
