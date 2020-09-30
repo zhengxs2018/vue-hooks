@@ -1,7 +1,9 @@
 <div align="center">
   <h1>
+   <br/>
     <br/>
-    <br/>
+    👍
+    <br />
     @zhengxs/vue-hooks
     <br />
     <br />
@@ -24,17 +26,14 @@
       <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier" />
     </a>
     <br />
-
-基于 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
+    <br />
   </sup>
+  基于 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
   <br />
   <br />
   <br />
   <br />
   <pre>npm i <a href="https://www.npmjs.com/package/@zhengxs/vue-hooks">@zhengxs/vue-hooks</a></pre>
-  <br />
-  <br />
-  <br />
   <br />
   <br />
 </div>
@@ -73,7 +72,7 @@ $ yarn build
 
 在 package.json 文件的 scripts 部分还有一些其他脚本可用.
 
-## 运行单元测试
+## 单元测试
 
 ```bash
 # 单元测试
