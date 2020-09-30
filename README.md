@@ -31,7 +31,7 @@
     <br />
     <br />
   </sup>
-  <div>基于 <b><a href="https://v3.cn.vuejs.org/">vue3.x</a></b> 开发的 <b>hooks</b> 插件，未来将通过 b><a href="https://www.npmjs.com/package/@vue/composition-api">@vue/composition-api</a></b> 模块兼容 <b><a href="https://cn.vuejs.org/">vue3.x</a></b> 版本</div>
+  <div>基于 <b><a href="https://v3.cn.vuejs.org/">vue3.x</a></b> 开发的 <b>hooks</b> 插件，未来将通过 <b><a href="https://www.npmjs.com/package/@vue/composition-api">@vue/composition-api</a></b> 模块兼容 <b><a href="https://cn.vuejs.org/">vue2.x</a></b> 版本</div>
   <br />
   <br />
   <br />
