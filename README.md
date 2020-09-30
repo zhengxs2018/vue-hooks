@@ -25,15 +25,18 @@
     <a href="https://github.com/prettier/prettier">
       <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier" />
     </a>
+    <a href="http://hits.dwyl.com/zhengxs2018/zhengxs2018/vue-hooks">
+      <img src="http://hits.dwyl.com/zhengxs2018/zhengxs2018/vue-hooks.svg" alt="HitCount" />
+    </a>
     <br />
     <br />
   </sup>
-  基于 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
+  <div>基于 <b><a href="https://v3.cn.vuejs.org/">vue3.x</a></b> 开发的 <b>hooks</b> 插件，未来将通过 b><a href="https://www.npmjs.com/package/@vue/composition-api">@vue/composition-api</a></b> 模块兼容 <b><a href="https://cn.vuejs.org/">vue3.x</a></b> 版本</div>
   <br />
   <br />
   <br />
   <br />
-  <pre>npm i <a href="https://www.npmjs.com/package/@zhengxs/vue-hooks">@zhengxs/vue-hooks</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/@zhengxs/vue-hooks">@zhengxs/vue-hooks</a> --save</pre>
   <br />
   <br />
 </div>
