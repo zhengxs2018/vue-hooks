@@ -1,4 +1,4 @@
-import { ref, reactive } from 'vue'
+import { ref, reactive, onUnmounted } from 'vue'
 
 import axios, { CancelTokenSource } from 'axios'
 
@@ -8,6 +8,15 @@ const CancelToken = axios.CancelToken
 
 const never: Promise<never> = new Promise(() => void 0)
 
+/**
+ * 使用 axios 封装的 hooks 函数
+ *
+ * @todo 支持自定义 axios 实例
+ * @todo service 支持传递 AxiosRequestConfig
+ *
+ * @param service 后台服务
+ * @param options 可选配置
+ */
 export function useAxios<T extends object = any, U = any, S extends UseAxiosService<T, U> = any>(
   service: S,
   options: UseAxiosOptions = {}
@@ -61,6 +70,9 @@ export function useAxios<T extends object = any, U = any, S extends UseAxiosServ
       error: errorRef.value
     }
   }
+
+  // 销毁时自动取消请求
+  onUnmounted(() => cancel())
 
   return {
     loading: loadingRef,
