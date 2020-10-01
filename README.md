@@ -117,4 +117,8 @@ See [CHANGELOG.md](./CHANGELOG.md)
 
 See [CONTRIBUTING.md](./.github/CONTRIBUTING.md)
 
+## License
+
+* MIT
+
 [nodejs]: https://nodejs.org
