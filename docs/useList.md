@@ -182,3 +182,7 @@ export interface ListMethods {
   toJSON(): List<T>
 }
 ```
+
+## React Hooks
+
+如果希望在 react 中使用，可以参考这里的代码: [传送门](https://github.com/zhengxs2018/snowpack-react-app/blob/master/src/hooks/useList/api.ts)

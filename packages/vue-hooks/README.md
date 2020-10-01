@@ -15,50 +15,57 @@ Vue Hooks Library.
 $ npm install @zhengxs/vue-hooks --save
 ```
 
-## 🔨 使用
+## Hooks 列表
+
+- **UI 状态**
+  - useList 分页列表管理
+- **网络请求**
+  - useAxios 基于 axios 封装
+- **数据模拟**
+  - createMockAPI 本地 API 模拟
+
+## DEMO
 
 封装业务接口
 
 ```typescript
-import type { AxiosRequestConfig } from 'axios'
-
 import { reactive } from 'vue'
 
 import { useAxios, useList, List } from '@zhengxs/vue-hooks'
 
-import { request } from '../../lib/http'
-import type { User } from '../../interfaces/user'
-
-import { UseUserListOptions, UserListQuery, UserListParams } from './types'
-
 export function useUserList(options: UseUserListOptions = {}) {
-  const service = (params: UserListParams, config: AxiosRequestConfig) => {
-    return request({ ...config, url: '/api/user/list', params })
-  }
-
-  const { loading, error, run, cancel } = useAxios<List<User>, UserListParams>(service, {
-    silent: options.silent,
-    unique: true,
-  })
-
+  // 通用查询条件
   const query = reactive<UserListQuery>({
+    ...options.query,
     nickname: '',
   })
 
+  // 后台服务
+  const service = (params: UserListParams, config: AxiosRequestConfig) => {
+    return http.get('/api/user/list', { ...config, params })
+  }
+
+  // 使用 useAxios 自动管理状态
+  const { loading, error, run, cancel } = useAxios<List<User>, UserListParams>(service, {
+    silent: true, // 当错误的时候内部消化
+    unique: true, // 不管调用几次，都仅保留最后一次的请求状态
+  })
+
+  // 使用 useList 管理列表分页调用
   const list = useList<User>({
     loading: loading,
-    mode: options.mode,
-    autoLoad: options.autoLoad,
+    mode: options.mode, // 列表变更模式，append：追加 | replace: 替换 | manual: 手动处理
+    autoLoad: options.autoLoad, // 是否自动加载第一页的数据
     onFetch(args) {
-      return run({ ...args, nickname: query.nickname })
+      return run({ ...args, ...query })
     },
   })
 
   return {
     ...list,
     loading,
-    error,
     query,
+    error,
     cancel
   }
 }
@@ -67,14 +74,14 @@ export function useUserList(options: UseUserListOptions = {}) {
 
 在组件中使用
 
-```typescript
-import { FunctionalComponent as FC, defineComponent, watch } from 'vue'
+```tsx
+import { FunctionalComponent as FC, defineComponent } from 'vue'
 
 import { Alert, Input, Table } from 'ant-design-vue'
 
 import { useUserList } from '../hooks/useUserList/index'
 
-export const TableList: FC = () => {
+export const UserList: FC = () => {
   const { loading, error, query, items, page, pageSize, total, search, loadPageData, toJSON } = useUserList({
     autoLoad: true
   })
@@ -92,7 +99,7 @@ export const TableList: FC = () => {
     }
   ]
 
-  const pagination: any = {
+  const pagination = {
     current: page,
     pageSize: pageSize,
     total: total,
@@ -100,21 +107,13 @@ export const TableList: FC = () => {
       return loadPageData(page, { force: true })
     },
     onShowSizeChange(_: number, pageSize: number) {
-      return search({ page: 1, pageSize })
+      return search({ pageSize })
     }
   }
 
-  watch(
-    () => {
-      return items.value
-    },
-    () => {
-      console.log(toJSON())
-    }
-  )
-
   return () => (
     <>
+      <h1>用户列表</h1>
       {error.value && <Alert type="error" message="加载错误" description={error.value.message} closable />}
       <Input
         value={query.nickname}
@@ -129,9 +128,11 @@ export const TableList: FC = () => {
 }
 
 export default defineComponent({
-  name: 'TableList',
-  setup: TableList
+  name: 'UserList',
+  setup: UserList
 })
 ```
 
-[nodejs]: https://nodejs.org
+## License
+
+* MIT

@@ -30,7 +30,8 @@ export const TableList: FC = () => {
       return loadPageData(page, { force: true })
     },
     onShowSizeChange(_: number, pageSize: number) {
-      return search({ page: 1, pageSize })
+      // search 方法，默认 page = 1
+      return search({ pageSize })
     }
   }
 

@@ -1,4 +1,5 @@
 import { createMockAPI, createMockTable, createMockQueryBuilder } from '@zhengxs/vue-hooks'
+import { toSafeInteger, trim } from 'lodash-es'
 
 import type { User } from '../interfaces/user'
 
@@ -15,7 +16,9 @@ const table = createMockTable<User>({
 })
 
 function createQueryBuilder(args: UserListQuery) {
-  const { nickname, page, pageSize } = args
+  const nickname = trim(args.nickname || '')
+  const page = toSafeInteger(args.page || 1)
+  const pageSize = toSafeInteger(args.pageSize || 10)
 
   const query = createMockQueryBuilder(table)
     .offset((page - 1) * pageSize)

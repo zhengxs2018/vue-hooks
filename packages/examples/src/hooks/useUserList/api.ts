@@ -8,7 +8,7 @@ import { useAxios, useList, List } from '@zhengxs/vue-hooks'
 import { request } from '../../lib/http'
 import type { User } from '../../interfaces/user'
 
-import { UseUserListOptions, UserListQuery, UserListParams } from './types'
+import type { UseUserListOptions, UserListQuery, UserListParams } from './types'
 
 export function useUserList(options: UseUserListOptions = {}) {
   const service = (params: UserListParams, config: AxiosRequestConfig) => {
