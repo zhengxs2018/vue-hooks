@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "father build",
+    "build": "father-build",
     "dev": "yarn workspace @zhengxs/vue-hooks-examples dev",
     "watch": "tsc -b -w --preserveWatchOutput",
     "test": "jest",
@@ -41,7 +41,7 @@
     "cross-env": "^7.0.2",
     "cz-conventional-changelog": "^3.1.0",
     "cz-customizable": "^6.2.0",
-    "father": "^2.29.10",
+    "father-build": "^1.18.5",
     "globby": "^11.0.0",
     "jest": "^25.2.7",
     "lerna": "^3.20.2",
