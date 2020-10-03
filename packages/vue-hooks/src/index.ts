@@ -1,5 +1,3 @@
-export * from './createMockAPI/index'
-
 export * from './useAxios/index'
 export * from './useList/index'
 

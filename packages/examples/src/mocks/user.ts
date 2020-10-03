@@ -1,4 +1,4 @@
-import { createMockAPI, createMockTable, createMockQueryBuilder } from '@zhengxs/vue-hooks'
+import { blockHttpRequest, createTable, createQueryBuilder } from '@zhengxs/mock'
 import { toSafeInteger, trim } from 'lodash-es'
 
 import type { User } from '../interfaces/user'
@@ -9,30 +9,35 @@ export type UserListQuery = {
   pageSize: number
 }
 
-const table = createMockTable<User>({
+const table = createTable<User>({
   id: '@id',
   username: '@first',
   nickname: '@cname',
 })
 
-function createQueryBuilder(args: UserListQuery) {
-  const nickname = trim(args.nickname || '')
+blockHttpRequest('/api/user/list', 'GET', (ctx) => {
+  // 获取查询参数
+  const args = ctx.query
+
+  // 分页数据
   const page = toSafeInteger(args.page || 1)
   const pageSize = toSafeInteger(args.pageSize || 10)
 
-  const query = createMockQueryBuilder(table)
-    .offset((page - 1) * pageSize)
-    .limit(pageSize)
+  // 创建查询构造器
+  const query = createQueryBuilder(table)
 
+  // 添加昵称过滤
+  const nickname = trim(args.nickname || '')
   if (nickname) {
+    // 支持多个过滤条件
     query.where((row: User) => {
       return row.nickname.indexOf(nickname as string) > -1
     })
   }
 
-  return query
-}
-
-createMockAPI('/api/user/list', 'GET', (ctx) => {
-  return { code: 200, data: createQueryBuilder((ctx.query as unknown) as UserListQuery).pagination() }
+  return {
+    code: 200,
+    message: 'ok',
+    data: query.pagination({ page, pageSize })
+  }
 })

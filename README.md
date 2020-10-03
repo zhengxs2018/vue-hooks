@@ -47,8 +47,6 @@
   - [`useList`](./docs/useList.md) 分页列表管理
 - **网络请求**
   - [`useAxios`](./docs/useAxios.md) 基于 axios 封装
-- **数据模拟**
-  - [`createMockAPI`](./docs/createMockAPI.md) 本地 API 模拟
 
 ## 开发步骤
 

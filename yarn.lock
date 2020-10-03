@@ -3122,6 +3122,16 @@
   resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.0.0.tgz#ec089236629ecc0f10346b92f101ff4339169f1a"
   integrity sha512-4XWL/avABGxU2E2ZF1eZq3Tj7fvksCMssDZUHOykBIMmh5d+KcAnQMC5XHMhtnA0NAvktYsA2YpdsVwVmhWzvA==
 
+"@zhengxs/mock@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/@zhengxs/mock/-/mock-0.1.0.tgz#788d2506311accfe331e69a83fab6371bb8fe9ad"
+  integrity sha512-19D58h9ZppyLY6TsIfSBj7loyXWgiObcRhPhy4YbtFbhgJ5ypcdPtpPsNRtUd7Shpw8TisL5T0Oycs8QueNffA==
+  dependencies:
+    "@vue/reactivity" "^3.0.0"
+    better-mock "^0.2.8"
+    path-to-regexp "^6.1.0"
+    tslib "^1.9.0"
+
 "@zkochan/cmd-shim@^3.1.0":
   version "3.1.0"
   resolved "https://registry.npmjs.org/@zkochan/cmd-shim/-/cmd-shim-3.1.0.tgz#2ab8ed81f5bb5452a85f25758eb9b8681982fd2e"

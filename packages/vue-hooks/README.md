@@ -5,7 +5,7 @@ Vue Hooks Library.
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![NPM version](https://img.shields.io/npm/v/@zhengxs/vue-hooks.svg?style=flat)
 ![NPM downloads](https://img.shields.io/npm/dm/@zhengxs/vue-hooks.svg?style=flat)
-![License](https://img.shields.io/npm/l/@nrwl/workspace.svg?style=flat-square)
+![License](https://img.shields.io/npm/l/@zhengxs/vue-hooks.svg?style=flat-square)
 
 基于 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
 
@@ -21,8 +21,6 @@ $ npm install @zhengxs/vue-hooks --save
   - useList 分页列表管理
 - **网络请求**
   - useAxios 基于 axios 封装
-- **数据模拟**
-  - createMockAPI 本地 API 模拟
 
 ## 使用
 

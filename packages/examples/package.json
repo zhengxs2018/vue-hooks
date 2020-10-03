@@ -17,6 +17,7 @@
   "devDependencies": {
     "@types/lodash-es": "^4.17.3",
     "@vue/compiler-sfc": "^3.0.0",
+    "@zhengxs/mock": "^0.1.0",
     "postcss-nesting": "^7.0.1",
     "sass": "^1.26.11",
     "typescript": "^4.0.3",
