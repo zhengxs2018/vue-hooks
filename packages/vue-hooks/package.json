@@ -15,15 +15,16 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "optionalDependencies": {
     "axios": "^0.20.0",
     "better-mock": "^0.2.8",
-    "path-to-regexp": "^6.1.0",
-    "tslib": "^1.9.0",
-    "vue": "^3.0.0"
+    "path-to-regexp": "^6.1.0"
+  },
+  "dependencies": {
+    "tslib": "^1.9.0"
   },
   "devDependencies": {
     "@vue/reactivity": "^3.0.0",
