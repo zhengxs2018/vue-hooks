@@ -25,9 +25,6 @@
     <a href="https://github.com/prettier/prettier">
       <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier" />
     </a>
-    <a href="http://hits.dwyl.com/zhengxs2018/zhengxs2018/vue-hooks">
-      <img src="http://hits.dwyl.com/zhengxs2018/zhengxs2018/vue-hooks.svg" alt="HitCount" />
-    </a>
     <br />
     <br />
   </sup>
