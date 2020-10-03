@@ -2,10 +2,7 @@
   "extends": "../../tsconfig-base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
-    "types": [
-      "@vue/composition-api"
-    ]
+    "rootDir": "./src"
   },
   "include": ["src/**/*"],
   "references": []
