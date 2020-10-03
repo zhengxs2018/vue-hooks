@@ -7,7 +7,7 @@ Vue Hooks Library.
 ![NPM downloads](https://img.shields.io/npm/dm/@zhengxs/vue-hooks.svg?style=flat)
 ![License](https://img.shields.io/npm/l/@nrwl/workspace.svg?style=flat-square)
 
-基础 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
+基于 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
 
 ## 📦 安装
 
@@ -24,7 +24,7 @@ $ npm install @zhengxs/vue-hooks --save
 - **数据模拟**
   - createMockAPI 本地 API 模拟
 
-## DEMO
+## 使用
 
 封装业务接口
 
