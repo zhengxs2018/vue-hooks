@@ -3063,7 +3063,7 @@
     "@vue/compiler-core" "3.0.0"
     "@vue/shared" "3.0.0"
 
-"@vue/compiler-sfc@^3.0.0-rc.1", "@vue/compiler-sfc@^3.0.0-rc.5":
+"@vue/compiler-sfc@^3.0.0", "@vue/compiler-sfc@^3.0.0-rc.5":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@vue/compiler-sfc/-/compiler-sfc-3.0.0.tgz#efa38037984bd64aae315828aa5c1248c6eadca9"
   integrity sha512-1Bn4L5jNRm6tlb79YwqYUGGe+Yc9PRoRSJi67NJX6icdhf84+tRMtESbx1zCLL9QixQXu2+7aLkXHxvh4RpqAA==
@@ -12894,12 +12894,12 @@ vite@^1.0.0-rc.1:
     vue "^3.0.0-rc.5"
     ws "^7.2.3"
 
-vue-router@^4.0.0-beta.11:
-  version "4.0.0-beta.12"
-  resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.0.0-beta.12.tgz#873d1bbd16882ab2ae35973e3e691412104f3914"
-  integrity sha512-prbqAs2hSlKGt3U/Iyq8G62q/oprwmEd//a6x5M1uqP1aZxwjq0s27ZG8hfUSOOPB7SYg4NOydwy6zi/b3S2Ww==
+vue-router@^4.0.0-beta.13:
+  version "4.0.0-beta.13"
+  resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.0.0-beta.13.tgz#4611d09a9e44f231cc401ecc294a7f2dcb30e6a6"
+  integrity sha512-dYv9qpHPaojQlfujViiTkPkf1Bf5RCFzkCkdVFc1cENzWJYAGJanpIHiyjyKoM4u7IDFBZMItci+U4ieaEWA8A==
 
-vue@^3.0.0, vue@^3.0.0-rc.1, vue@^3.0.0-rc.5:
+vue@^3.0.0, vue@^3.0.0-rc.5:
   version "3.0.0"
   resolved "https://registry.npmjs.org/vue/-/vue-3.0.0.tgz#cfb5df5c34efce319b113a1667d12b74dcfd9c90"
   integrity sha512-ZMrAARZ32sGIaYKr7Fk2GZEBh/VhulSrGxcGBiAvbN4fhjl3tuJyNFbbbLFqGjndbLoBW66I2ECq8ICdvkKdJw==
