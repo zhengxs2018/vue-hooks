@@ -3,12 +3,6 @@ import { toSafeInteger, trim } from 'lodash-es'
 
 import type { User } from '../interfaces/user'
 
-export type UserListQuery = {
-  nickname?: string
-  page: number
-  pageSize: number
-}
-
 const table = createTable<User>({
   id: '@id',
   username: '@first',
@@ -31,7 +25,7 @@ blockHttpRequest('/api/user/list', 'GET', (ctx) => {
   if (nickname) {
     // 支持多个过滤条件
     query.where((row: User) => {
-      return row.nickname.indexOf(nickname as string) > -1
+      return row.nickname.indexOf(nickname) > -1
     })
   }
 
