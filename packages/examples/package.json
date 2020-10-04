@@ -1,13 +1,13 @@
 {
   "name": "@zhengxs/vue-hooks-examples",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
   },
   "dependencies": {
-    "@zhengxs/vue-hooks": "0.1.1",
+    "@zhengxs/vue-hooks": "^0.1.2",
     "ant-design-vue": "^2.0.0-beta.10",
     "axios": "^0.20.0",
     "lodash-es": "^4.17.15",
