@@ -6,7 +6,7 @@ import type { User } from '../interfaces/user'
 const table = createTable<User>({
   id: '@id',
   username: '@first',
-  nickname: '@cname',
+  nickname: '@cname'
 })
 
 blockHttpRequest('/api/user/list', 'GET', (ctx) => {
@@ -33,5 +33,27 @@ blockHttpRequest('/api/user/list', 'GET', (ctx) => {
     code: 200,
     message: 'ok',
     data: query.pagination({ page, pageSize })
+  }
+})
+
+blockHttpRequest('/api/user/detail', 'GET', () => {
+  return {
+    code: 200,
+    message: 'ok',
+    data: table.rows[0]
+  }
+})
+
+blockHttpRequest('/api/user/create', 'POST', () => {
+  return {
+    code: 200,
+    message: 'ok'
+  }
+})
+
+blockHttpRequest('/api/user/update', 'POST', () => {
+  return {
+    code: 200,
+    message: 'ok'
   }
 })

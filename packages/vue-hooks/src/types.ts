@@ -9,6 +9,8 @@ export type IterableCollections = Map<any, any> | Set<any>
 
 export type CollectionTypes = IterableCollections | WeakCollections
 
+export type UnwrapNestedRefs<T> = T extends Ref ? T : UnwrapRef<T>
+
 export type SymbolExtract<T> = (T extends {
   [Symbol.asyncIterator]: infer V
 }

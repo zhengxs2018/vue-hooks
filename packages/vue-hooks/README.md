@@ -18,7 +18,8 @@ $ npm install @zhengxs/vue-hooks --save
 ## Hooks 列表
 
 - **UI 状态**
-  - useList 分页列表管理
+  - useList 分页列表
+  - useForm 表单逻辑
 - **网络请求**
   - useAxios 基于 axios 封装
 

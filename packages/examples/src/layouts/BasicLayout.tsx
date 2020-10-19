@@ -29,6 +29,7 @@ export const BasicLayout: FC = (_, { slots }) => {
           <Sider width={200}>
             <Menu mode="inline" selectedKeys={[route.path]} style={{ height: '100%' }} onClick={onClick}>
               <Item key="/TableList">TableList</Item>
+              <Item key="/Form">Form</Item>
             </Menu>
           </Sider>
           <Content style={{ padding: '0 24px', minHeight: 280 }}>{slots}</Content>
@@ -41,5 +42,5 @@ export const BasicLayout: FC = (_, { slots }) => {
 
 export default defineComponent({
   name: 'BasicLayout',
-  setup: BasicLayout,
+  setup: BasicLayout
 })

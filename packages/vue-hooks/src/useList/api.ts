@@ -14,7 +14,7 @@ export function useList<T>(options: UseListOptions<T>): UseListInstance<T> {
 
   // 列表状态
   const modeRef = ref(options.mode || 'replace')
-  const loadingRef = ref(options.loading)
+  const loadingRef = ref(options.loading || false)
 
   // 列表数据
   const itemsRef = ref<T[]>(options.items || [])
@@ -129,7 +129,7 @@ export function useList<T>(options: UseListOptions<T>): UseListInstance<T> {
   /** 数据转换  */
   function toJSON(): List<T> {
     return {
-      items: toRaw(itemsRef.value) as unknown as T[],
+      items: (toRaw(itemsRef.value) as unknown) as T[],
       page: pageRef.value,
       pageSize: pageSizeRef.value,
       total: totalRef.value

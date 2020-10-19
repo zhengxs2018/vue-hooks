@@ -3,6 +3,6 @@ export default {
     name: 'vueHooks'
   },
   replace: {
-    __VERSION__: require('./package.json').version,
-  },
+    __VERSION__: require('./package.json').version
+  }
 }
