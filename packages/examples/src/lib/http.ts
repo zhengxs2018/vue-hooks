@@ -5,8 +5,8 @@ import { hasOwn } from './util'
 const http = axios.create({
   baseURL: '/',
   headers: {
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 })
 
 http.interceptors.response.use(

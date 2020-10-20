@@ -1,5 +1,5 @@
 import type { UserConfig } from 'vite'
 
 export default <UserConfig>{
-  port: 3000,
+  port: 3000
 }

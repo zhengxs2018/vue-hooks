@@ -12,7 +12,7 @@ export function useForm<T extends object>(options: UseFormOptions<T>): UseFormIn
     onCreate,
     onUpdate,
     onValidate = noop,
-    onError = err => Promise.reject(err)
+    onError = (err) => Promise.reject(err)
   } = options
 
   const state = {

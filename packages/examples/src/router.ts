@@ -4,12 +4,12 @@ import routes from './routes'
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes
 })
 
 router.addRoute({
   path: '/',
-  redirect: '/TableList',
+  redirect: '/TableList'
 })
 
 if (process.env.NODE_ENV === 'development') {

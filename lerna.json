@@ -4,17 +4,8 @@
   "npmClient": "yarn",
   "command": {
     "publish": {
-      "allowBranch": [
-        "master",
-        "dev"
-      ]
+      "allowBranch": ["master", "dev"]
     }
   },
-  "ignoreChanges": [
-    "**/__tests__/**",
-    "**/test/**",
-    "**/*.test.ts",
-    "**/*.spec.ts",
-    "**/*.md"
-  ]
+  "ignoreChanges": ["**/__tests__/**", "**/test/**", "**/*.test.ts", "**/*.spec.ts", "**/*.md"]
 }

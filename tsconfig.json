@@ -1,8 +1,6 @@
 {
   "extends": "./tsconfig-base.json",
-  "references": [
-    { "path": "packages/vue-hooks" }
-  ],
+  "references": [{ "path": "packages/vue-hooks" }],
   /* The remaining fields are necessary to prevent double compilation */
   "files": [],
   "include": []

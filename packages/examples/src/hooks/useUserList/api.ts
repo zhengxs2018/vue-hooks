@@ -1,4 +1,3 @@
-
 import type { AxiosRequestConfig } from 'axios'
 
 import { reactive } from 'vue'
@@ -17,11 +16,11 @@ export function useUserList(options: UseUserListOptions = {}) {
 
   const { loading, error, run, cancel } = useAxios<List<User>, UserListParams>(service, {
     silent: options.silent,
-    unique: true,
+    unique: true
   })
 
   const query = reactive<UserListQuery>({
-    nickname: '',
+    nickname: ''
   })
 
   const list = useList<User>({
@@ -30,7 +29,7 @@ export function useUserList(options: UseUserListOptions = {}) {
     autoLoad: options.autoLoad,
     onFetch(args) {
       return run({ ...args, nickname: query.nickname })
-    },
+    }
   })
 
   return {
