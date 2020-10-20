@@ -26,13 +26,8 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
   // 是否结尾
   const isEnd = (): boolean => state.total > 0 && state.page >= state.total / state.pageSize
 
-  /**
-   * 刷新列表
-   *
-   * @param options
-   */
-  function refresh(options?: ListFetchOptions) {
-    return load({ page: state.page, pageSize: state.pageSize }, options)
+  function refresh(force?: boolean): Promise<void> {
+    return load({}, { refresh: true, force })
   }
 
   /**
@@ -40,8 +35,8 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
    *
    * @param args
    */
-  function search(args?: Partial<ListFetchArgs>) {
-    return load({ page: 1, pageSize: state.pageSize, ...args }, { force: true })
+  function search(args?: Partial<ListFetchArgs>): Promise<void> {
+    return load({ page: 1, ...args }, { force: true })
   }
 
   /**
@@ -50,11 +45,11 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
    * @param page
    * @param options
    */
-  function loadPageData(page: number, options?: ListFetchOptions) {
-    return load({ page, pageSize: state.pageSize }, options)
+  function loadPageData(page: number, options?: ListFetchOptions): Promise<void> {
+    return load({ page }, options)
   }
 
-  function loadPreviousPageData(force = false) {
+  function loadPreviousPageData(force = false): Promise<void> {
     if (isFirst()) {
       if (force === true) {
         return loadPageData(state.page, { force })
@@ -64,12 +59,12 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
     return loadPageData(state.page - 1, { force })
   }
 
-  function loadNextPageData(force = false) {
+  function loadNextPageData(force = false): Promise<void> {
     if (isEnd() && force === false) return Promise.resolve()
     return loadPageData(state.page + 1, { force })
   }
 
-  async function load(args: ListFetchArgs, options?: ListFetchOptions): Promise<void> {
+  async function load(args: Partial<ListFetchArgs>, options?: ListFetchOptions): Promise<void> {
     options = options || {}
 
     // 加载中并且不强制刷新就直接返回
@@ -82,9 +77,13 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
     const mode = state.mode
 
     // 请求数据
-    const res = await Promise.resolve(
-      onFetch(args || {}, { mode, state })
-    )
+    const params = {
+      page: state.page,
+      pageSize: state.pageSize,
+      query: state.query,
+      ...args
+    }
+    const res = await Promise.resolve(onFetch(params, { mode, state }))
 
     // 如果不反会数据那就跳过
     if (!res) return

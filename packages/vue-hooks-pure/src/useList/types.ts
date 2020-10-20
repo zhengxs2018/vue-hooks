@@ -42,7 +42,9 @@ export interface ListFetchHandlerOptions<T> extends ListFetchOptions {
 /**
  * 列表数据请求函数参数
  */
-export type ListFetchArgs = Omit<Pagination, 'total'>
+export interface ListFetchArgs extends Omit<Pagination, 'total'> {
+  query: Record<string, any>
+}
 
 /**
  * 请求响应结果
@@ -53,10 +55,7 @@ export interface ListFetchResponse<T> extends Partial<ListFetchArgs> {
 }
 
 export interface ListFetchHandler<T> {
-  (
-    args: ListFetchArgs,
-    options: ListFetchHandlerOptions<T>
-  ): Promise<ListFetchResponse<T>>
+  (args: ListFetchArgs, options: ListFetchHandlerOptions<T>): Promise<ListFetchResponse<T>>
 }
 
 /**
@@ -65,9 +64,7 @@ export interface ListFetchHandler<T> {
 export interface UseListOptions<T> extends Partial<List<T>> {
   /** 数据变更模式 */
   mode?: ListMode
-  /**
-   * 查询参数
-   */
+  /** 查询参数 */
   query?: Record<string, any>
   /** 自动加载 */
   autoLoad?: boolean
@@ -81,7 +78,7 @@ export interface UseListInstance<T> extends List<T> {
   isEnd(): boolean
 
   // async methods
-  refresh(options?: ListFetchOptions): Promise<void>
+  refresh(force?: boolean): Promise<void>
   search(args?: Partial<ListFetchArgs>): Promise<void>
   loadPageData(page: number, options?: ListFetchOptions): Promise<void>
   loadPreviousPageData(force?: boolean): Promise<void>
