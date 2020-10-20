@@ -32,7 +32,11 @@
     "**/build/**": true
   },
   "editor.minimap.enabled": false,
-  "cSpell.words": ["compat", "typedoc"],
+  "cSpell.words": [
+    "compat",
+    "pkgs",
+    "typedoc"
+  ],
   "cSpell.ignoreWords": [],
   "cSpell.ignorePaths": [".history", ".vscode", "package-lock.json", "yarn.lock"]
 }

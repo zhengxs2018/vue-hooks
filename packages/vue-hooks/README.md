@@ -7,7 +7,7 @@ Vue Hooks Library.
 ![NPM downloads](https://img.shields.io/npm/dm/@zhengxs/vue-hooks.svg?style=flat)
 ![License](https://img.shields.io/npm/l/@zhengxs/vue-hooks.svg?style=flat-square)
 
-基于 **vue3.x** 开发的 **hooks** 插件，未来将通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
+基于 **vue3.x** 开发的 **hooks** 插件，[@zhengxs/vue-hooks-compat](https://www.npmjs.com/package/@zhengxs/vue-hooks-compat) 通过 `@vue/composition-api` 模块兼容 **vue2.x** 版本
 
 ## 📦 安装
 
