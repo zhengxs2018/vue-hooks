@@ -5,18 +5,14 @@ export default {
     minFile: true,
     globals: {
       'axios': 'axios',
-      'better-mock': 'Mock',
       'vue': 'Vue',
-      "path-to-regexp": "pathToRegexp",
       'tslib': 'window',
     }
   },
-  pkgs: ['vue-hooks'],
+  pkgs: ['vue-hooks', 'vue-hooks-compat'],
   extraExternals: [
     '@vue/reactivity',
     "axios",
-    "better-mock",
-    "path-to-regexp",
     'vue'
   ],
   extraBabelPlugins: [
