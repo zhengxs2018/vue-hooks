@@ -36,7 +36,7 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
    * @param args
    */
   function search(args?: Partial<ListFetchArgs>): Promise<void> {
-    return load({ page: 1, ...args }, { force: true })
+    return load(Object.assign({ page: 1 }, args), { force: true })
   }
 
   /**
@@ -77,12 +77,14 @@ export function useList<T extends object>(options: UseListOptions<T>): UseListIn
     const mode = state.mode
 
     // 请求数据
-    const params = {
-      page: state.page,
-      pageSize: state.pageSize,
-      query: state.query,
-      ...args
-    }
+    const params = Object.assign(
+      {
+        page: state.page,
+        pageSize: state.pageSize,
+        query: state.query
+      },
+      args
+    )
     const res = await Promise.resolve(onFetch(params, { mode, state }))
 
     // 如果不反会数据那就跳过

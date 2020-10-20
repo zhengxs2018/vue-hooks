@@ -4,9 +4,9 @@
 
 ## 适用场景
 
-* 分页表格请求管理
-* 新闻等列表请求管理
-* 移动端无限滚动请求管理
+- 分页表格请求管理
+- 新闻等列表请求管理
+- 移动端无限滚动请求管理
 
 ## 使用
 
@@ -23,7 +23,7 @@ const {
   // 取消请求
   cancel
 } = useAxios((params, config) => {
-  return request({ ...config, url: '/api/user/list', params })
+  return request(Object.assign({}, config, { url: '/api/user/list', params }))
 })
 
 const {
@@ -55,8 +55,8 @@ const {
   autoLoad: true,
   // 获取远程数据
   onFetch(args) {
-    return run({ ...args, nickname: query.nickname })
-  },
+    return run(Object.assign({}, args, { nickname: query.nickname }))
+  }
 })
 ```
 
@@ -84,7 +84,7 @@ export interface ListOptions<T> {
   /** 加载状态 */
   loading?: boolean
 
-   /** 是否自动加载 */
+  /** 是否自动加载 */
   autoLoad?: boolean
 
   /** 初始数据 */
@@ -100,7 +100,7 @@ export interface ListOptions<T> {
   total?: number
 
   /** 自定义获取数据方法 */
-  onFetch(args, options):  Promise<ListFetchResponse<T>>
+  onFetch(args, options): Promise<ListFetchResponse<T>>
 }
 
 export interface ListFetchResponse<T> {

@@ -34,14 +34,15 @@ import { useAxios, useList, List } from '@zhengxs/vue-hooks'
 
 export function useUserList(options: UseUserListOptions = {}) {
   // 通用查询条件
-  const query = reactive<UserListQuery>({
-    ...options.query,
-    nickname: '',
-  })
+  const query = reactive<UserListQuery>(
+    Object.assign({}, options.query, {
+      nickname: '',
+    })
+  )
 
   // 后台服务
   const service = (params: UserListParams, config: AxiosRequestConfig) => {
-    return http.get('/api/user/list', { ...config, params })
+    return http.get('/api/user/list', Object.assign({}, config, { params }))
   }
 
   // 使用 useAxios 自动管理状态
@@ -56,17 +57,16 @@ export function useUserList(options: UseUserListOptions = {}) {
     mode: options.mode, // 列表变更模式，append：追加 | replace: 替换 | manual: 手动处理
     autoLoad: options.autoLoad, // 是否自动加载第一页的数据
     onFetch(args) {
-      return run({ ...args, ...query })
+      return run(Object.assign({}, args, query))
     },
   })
 
-  return {
-    ...list,
+  return Object.assign({}, list, {
     loading,
     query,
     error,
     cancel
-  }
+  })
 }
 
 ```

@@ -11,7 +11,7 @@ import type { UseUserListOptions, UserListQuery, UserListParams } from './types'
 
 export function useUserList(options: UseUserListOptions = {}) {
   const service = (params: UserListParams, config: AxiosRequestConfig) => {
-    return request({ ...config, url: '/api/user/list', params })
+    return request(Object.assign({}, config, { url: '/api/user/list', params }))
   }
 
   const { loading, error, run, cancel } = useAxios<List<User>, UserListParams>(service, {
@@ -28,15 +28,14 @@ export function useUserList(options: UseUserListOptions = {}) {
     mode: options.mode,
     autoLoad: options.autoLoad,
     onFetch(args) {
-      return run({ ...args, nickname: query.nickname })
+      return run(Object.assign({}, args, { nickname: query.nickname }))
     }
   })
 
-  return {
-    ...list,
+  return Object.assign({}, list, {
     loading,
     error,
     query,
     cancel
-  }
+  })
 }

@@ -34,7 +34,7 @@ export function useList<T>(options: UseListOptions<T>): UseListInstance<T> {
    * @param options 刷新配置
    */
   function refresh(options?: ListFetchOptions) {
-    return dispatchRequest({}, { ...options, refresh: true })
+    return dispatchRequest({}, Object.assign({}, options, { refresh: true }))
   }
 
   /**
@@ -44,7 +44,7 @@ export function useList<T>(options: UseListOptions<T>): UseListInstance<T> {
    */
   function search(args?: Partial<ListFetchArgs>) {
     // 默认，搜索就跳转回第一页
-    return dispatchRequest({ page: 1, ...args }, { force: true })
+    return dispatchRequest(Object.assign({ page: 1 }, args), { force: true })
   }
 
   /**
@@ -79,7 +79,7 @@ export function useList<T>(options: UseListOptions<T>): UseListInstance<T> {
     }
 
     const mode = modeRef.value
-    const res = await onFetch({ page, pageSize }, { ...options, state: toJSON(), mode })
+    const res = await onFetch({ page, pageSize }, Object.assign({}, options, { state: toJSON(), mode }))
     if (!res) return
 
     /** @todo 这里的类型这么定义？ */

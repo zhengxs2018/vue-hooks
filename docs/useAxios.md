@@ -26,7 +26,7 @@ const {
   // sync methods
   cancel
 } = useAxios((params, config) => {
-  return request({ ...config, url: '/api/user/list', params })
+  return request(Object.assign({}, config, {, url: '/api/user/list', params }))
 })
 ```
 
