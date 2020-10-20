@@ -1,0 +1,43 @@
+{
+  "name": "@zhengxs/vue-hooks-pure",
+  "version": "0.1.4",
+  "description": "纯 JavaScript 实现的 hook 函数",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "vue",
+    "vue2",
+    "vue-hooks"
+  ],
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "optionalDependencies": {
+    "axios": "^0.20.0"
+  },
+  "dependencies": {
+    "tslib": "^1.9.0"
+  },
+  "devDependencies": {
+    "axios": "^0.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhengxs2018/vue-hooks",
+    "directory": "packages/vue-hooks-pure"
+  },
+  "engines": {
+    "node": ">= 12.x",
+    "npm": ">= 6.x"
+  },
+  "author": {
+    "name": "zhengxs",
+    "email": "zhengxs2018@foxmail.com"
+  },
+  "license": "MIT"
+}
