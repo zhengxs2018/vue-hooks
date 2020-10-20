@@ -14,6 +14,9 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "optionalDependencies": {
     "axios": "^0.20.0"
   },
