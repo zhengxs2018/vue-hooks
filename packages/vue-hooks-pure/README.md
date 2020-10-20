@@ -5,8 +5,7 @@
 ![NPM downloads](https://img.shields.io/npm/dm/@zhengxs/vue-hooks-pure.svg?style=flat)
 ![License](https://img.shields.io/npm/l/@zhengxs/vue-hooks-pure.svg?style=flat-square)
 
-基于 vue2 开发的纯 JavaScript 逻辑的 hook，无任何生命周期的功能，必须在 data 中使用。
-
+基于 vue2 纯 JavaScript 逻辑的函数，必须在 data 中使用。
 
 ## 📦 安装
 

@@ -1,6 +1,6 @@
 {
   "name": "@zhengxs/vue-hooks-pure",
-  "version": "0.1.4",
+  "version": "0.1.0",
   "description": "纯 JavaScript 实现的 hook 函数",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",

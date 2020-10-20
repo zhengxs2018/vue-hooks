@@ -9,7 +9,7 @@ export default {
       tslib: 'window'
     }
   },
-  pkgs: ['vue-hooks', 'vue-hooks-compat'],
+  pkgs: ['vue-hooks', 'vue-hooks-compat', 'vue-hooks-pure'],
   extraExternals: ['@vue/reactivity', 'axios', 'vue'],
   extraBabelPlugins: ['transform-async-to-promises']
 }

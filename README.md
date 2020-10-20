@@ -38,9 +38,10 @@
   <br />
 </div>
 
-## 兼容 vue 2.x
+## Vue.js 2.x 支持
 
-* [@zhengxs/vue-hooks-compat](https://www.npmjs.com/package/@zhengxs/vue-hooks-compat)
+- [@zhengxs/vue-hooks-compat](https://www.npmjs.com/package/@zhengxs/vue-hooks-compat)
+- [@zhengxs/vue-hooks-pure](https://www.npmjs.com/package/@zhengxs/vue-hooks-pure)
 
 ## 文档
 

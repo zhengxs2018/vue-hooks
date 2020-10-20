@@ -23,6 +23,11 @@ $ npm install @zhengxs/vue-hooks --save
 - **网络请求**
   - useAxios 基于 axios 封装
 
+## Vue.js 2.x 支持
+
+- [@zhengxs/vue-hooks-compat](https://www.npmjs.com/package/@zhengxs/vue-hooks-compat)
+- [@zhengxs/vue-hooks-pure](https://www.npmjs.com/package/@zhengxs/vue-hooks-pure)
+
 ## 使用
 
 封装业务接口
