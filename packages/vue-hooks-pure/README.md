@@ -17,6 +17,7 @@ $ npm install @zhengxs/vue-hooks-pure --save
 ## Hooks 列表
 
 - **UI 状态**
+  - useList 分页列表
   - useForm 表单逻辑
 
 ## 使用
