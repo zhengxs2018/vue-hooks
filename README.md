@@ -25,6 +25,12 @@
     <a href="https://github.com/prettier/prettier">
       <img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier" />
     </a>
+    <a href="https://github.com/umijs/father/">
+      <img src="https://img.shields.io/badge/build%20with-father-028fe4.svg" alt="Build With father" />
+    </a>
+    <a href="https://lerna.js.org/">
+      <img src="https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg" alt="lerna" />
+    </a>
     <br />
     <br />
   </sup>
@@ -76,47 +82,13 @@ $ yarn build
 
 在 package.json 文件的 scripts 部分还有一些其他脚本可用.
 
-## 单元测试
+## 参与贡献
 
-```bash
-# 单元测试
-$ yarn test
+我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 😃 ：
 
-# 单元测试并且生成测试覆盖率
-$ yarn cov
-```
-
-## 版本发布
-
-**自动发布**
-
-```bash
-# 发布内测版
-$ yarn canary
-
-# 发布测试版
-$ yarn beta
-```
-
-**手动发布**
-
-```bash
-# 更新版本，内置代码检查
-$ npm version <newversion|major|minor|patch>
-
-# 发布包，内置代码构建
-$ npm publish
-```
-
-See [npm](https://docs.npmjs.com/) for more help.
-
-## 更新日志
-
-See [CHANGELOG.md](./CHANGELOG.md)
-
-## 贡献
-
-See [CONTRIBUTING.md](./.github/CONTRIBUTING.md)
+- 在你的公司或个人项目中使用 vue-hooks。
+- 通过 [Issue](http://github.com/zhengxs2018/vue-hooks/issues) 报告 bug 或进行咨询。
+- 提交 [Pull Request](http://github.com/zhengxs2018/vue-hooks/pulls) 改进 vue-hooks 的代码。
 
 ## License
 
