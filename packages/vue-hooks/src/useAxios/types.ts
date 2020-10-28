@@ -1,26 +1,37 @@
-import type { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig, AxiosInstance } from 'axios'
 
-import type { Ref, UnwrapRef } from 'vue'
-
-export interface UseAxiosState<T> {
-  loading: boolean
-  data: T | null
-  error: Error | null
-}
+/**
+ * 请求模式
+ *
+ * normal: 默认
+ * single: 单请求
+ * polling: 轮训
+ */
+export type RequestMode = 'normal' | 'single' | 'polling'
 
 export interface UseAxiosOptions {
-  unique?: boolean
-  silent?: boolean
+  /**
+   * 请求模式
+   */
+  mode?: RequestMode
+  /**
+   * axios 客户端实例
+   */
+  client?: AxiosInstance
+  /**
+   * 设置为 false 错误将永远不会出现
+   *
+   * 注意：这将让状态永远处于 padding 状态
+   */
+  throwIfError?: boolean | 'never' | 'silent'
+  /**
+   * 页面销毁时自动取消请求
+   */
+  cancelOnUnmounted?: boolean
 }
 
-export interface UseAxiosInstance<T, P> {
-  data: Ref<UnwrapRef<T> | null>
-  loading: Ref<boolean>
-  error: Ref<Error | null>
-
-  run(args: P): Promise<T>
-  cancel(message?: string): void
-  toJSON(): UseAxiosState<T>
+export interface CustomService<T, V> {
+  (data: T, options: AxiosRequestConfig): Promise<V>
 }
 
-export type UseAxiosService<T, U> = (args: U, options: AxiosRequestConfig) => Promise<T>
+export type UseAxiosService<T, V> = string | AxiosRequestConfig | CustomService<T, V>

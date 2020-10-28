@@ -1,85 +1,91 @@
-import { ref, reactive, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
-import axios, { CancelTokenSource } from 'axios'
+import axios, { AxiosRequestConfig, AxiosInstance, CancelTokenSource } from 'axios'
 
-import type { UseAxiosService, UseAxiosOptions, UseAxiosState, UseAxiosInstance } from './types'
+import { UseAxiosService, CustomService, UseAxiosOptions } from './types'
 
 const CancelToken = axios.CancelToken
 
-const never: Promise<never> = new Promise(() => void 0)
+function createService<T, V>(service: UseAxiosService<T, V>, client: AxiosInstance): CustomService<T, V> {
+  switch (typeof service) {
+    case "function":
+      return service
+    case "string":
+      return (params: T, options: AxiosRequestConfig) => {
+        return client.get<unknown, V>(service as string, { ...options, params })
+      }
+    default:
+      return (data: T, options: AxiosRequestConfig) => {
+        return client.request<unknown, V>({ ...service, ...options, data })
+      }
+  }
+}
 
-/**
- * 使用 axios 封装的 hooks 函数
- *
- * @todo 支持自定义 axios 实例
- * @todo service 支持传递 AxiosRequestConfig
- *
- * @param service 后台服务
- * @param options 可选配置
- */
-export function useAxios<T extends object = any, U = any, S extends UseAxiosService<T, U> = any>(
-  service: S,
-  options: UseAxiosOptions = {}
-): UseAxiosInstance<T, U> {
-  let cancelSource: CancelTokenSource | null = null
+function createHttpClient() {
+  const client = axios.create();
+  client.interceptors.response.use(res => res.data)
+  return client
+}
 
-  const unique = options.unique !== true
-  const silent = options.silent !== false
+export function useAxios<T, V>(url: UseAxiosService<T, V>, options?: UseAxiosOptions) {
+  const {
+    mode = 'normal',
+    client = createHttpClient(),
+    throwIfError = false,
+    cancelOnUnmounted = true
+  } = options || {}
 
-  const loadingRef = ref<boolean>(false)
-  const dataRef = ref<T | null>(null)
+  const loadingRef = ref(false)
   const errorRef = ref<Error | null>(null)
 
-  const onSuccess = (data: T) => {
-    loadingRef.value = false
-    // @ts-ignore
-    dataRef.value = reactive<T>(data)
-    return data
-  }
+  const service = createService(url, client)
 
-  const onError = (error: Error): Promise<never> => {
-    loadingRef.value = false
-    errorRef.value = error
-    return silent ? never : Promise.reject(error)
-  }
-
-  const run = (args: U): Promise<T> => {
-    if (unique) cancel()
-
-    const source = CancelToken.source()
-    cancelSource = source
-
-    loadingRef.value = true
-    dataRef.value = null
-    errorRef.value = null
-    return service(args, { cancelToken: source.token }).then(onSuccess, onError)
-  }
-
-  const cancel = (message?: string) => {
-    if (cancelSource) {
-      cancelSource.cancel(message)
-      cancelSource = null
+  let cancelTokenSource: CancelTokenSource | null = null
+  function cancel(msg?: string) {
+    if (cancelTokenSource) {
+      cancelTokenSource.cancel(msg)
+      cancelTokenSource = null
     }
   }
 
-  /** 数据转换  */
-  function toJSON(): UseAxiosState<T> {
-    return {
-      loading: loadingRef.value,
-      data: dataRef.value as T,
-      error: errorRef.value
+  function send(data: T, options?: AxiosRequestConfig) {
+    // 如果是单请求模式
+    // 每次请求前取消上一次的请求
+    if (mode === 'single') cancel('Duplicate request.')
+
+    loadingRef.value = false
+
+    // 发送请求
+    const request = service(data, {
+      ...options,
+      cancelToken: (cancelTokenSource = CancelToken.source()).token
+    })
+
+    function onError(error: Error) {
+      // 保留上一次错误
+      errorRef.value = error
+
+      // 永远不会触发错误
+      if (throwIfError === false || throwIfError === 'never') {
+        return new Promise(() => void 0)
+      }
+
+      return throwIfError !== 'silent' && Promise.reject(error)
     }
+
+    return request.catch(onError).finally(() => void (loadingRef.value = false))
   }
 
-  // 销毁时自动取消请求
-  onUnmounted(() => cancel())
+  // 页面销毁时自动取消
+  if (cancelOnUnmounted) {
+    onUnmounted(cancel)
+  }
 
   return {
     loading: loadingRef,
-    data: dataRef,
+    client,
     error: errorRef,
-    run,
-    cancel,
-    toJSON
+    send,
+    cancel
   }
 }
