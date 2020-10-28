@@ -1,19 +1,33 @@
-import { reactive, ref } from 'vue'
+import { reactive, ref, unref, toRaw } from 'vue'
 
-import type { UseFormOptions, UseFormInstance, FormMode, ResetOptions } from './types'
+import type {
+  CustomFormOptions,
+  GeneralFormOptions,
+  UseFormOptions,
+  UseFormInstance,
+  FormMode,
+  ResetOptions,
+  SubmitHandler
+} from './types'
 
 import { noop, hasOwn, pick } from '../utils'
+
+function bindSubmit<T extends object>({ onCreate, onUpdate }: GeneralFormOptions<T>): SubmitHandler<T> {
+  return (data, mode) => (mode === 'new' ? onCreate(data) : onUpdate(data))
+}
 
 export function useForm<T extends object>(options: UseFormOptions<T>): UseFormInstance<T> {
   const initialState = options.data
   const {
     serialize = pick,
     onFetch,
-    onCreate,
-    onUpdate,
     onValidate = noop,
     onError = (err) => Promise.reject(err)
   } = options
+
+  const onSubmit = typeof (options as CustomFormOptions<T>).onSubmit
+    ? (options as CustomFormOptions<T>).onSubmit
+    : bindSubmit(options as GeneralFormOptions<T>)
 
   const modeRef = ref<FormMode>(options.mode || 'new')
   const loadingRef = ref(options.loading || false)
@@ -29,39 +43,36 @@ export function useForm<T extends object>(options: UseFormOptions<T>): UseFormIn
     try {
       loadingRef.value = true
 
-      if (modeRef.value === 'new') {
-        Object.assign(data, initialState())
-      } else {
+      const mode = unref(modeRef.value)
+      if (mode !== 'new' && typeof onFetch === 'function') {
         Object.assign(data, initialState(), await onFetch())
+      } else {
+        Object.assign(data, initialState())
       }
     } finally {
       loadingRef.value = false
     }
   }
 
-  async function submit() {
+  async function submit(): Promise<void> {
     if (loadingRef.value) return
 
     try {
-      const formData = toJSON()
-      const result = await Promise.resolve(onValidate(formData))
-      if (result === false) return
-
-      loadingRef.value = true
-      if (modeRef.value === 'new') {
-        Object.assign(data, await onCreate(formData))
-      } else {
-        Object.assign(data, await onUpdate(formData))
+      const result = await Promise.resolve(onValidate((data as unknown) as T))
+      if (result !== false) {
+        loadingRef.value = true
+        Object.assign(data, await onSubmit(toJSON(), unref(modeRef.value)))
       }
     } catch (err) {
-      return onError(err)
+      return onError(err) as never
     } finally {
       loadingRef.value = false
     }
   }
 
-  function toJSON(): Partial<T> {
-    return serialize(data, keys)
+  function toJSON(): T {
+    // @ts-ignore
+    return serialize(toRaw(data), keys) as T
   }
 
   return {
