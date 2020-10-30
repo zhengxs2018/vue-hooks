@@ -24,10 +24,6 @@ export interface UseAxiosOptions {
    * 注意：这将让状态永远处于 padding 状态
    */
   throwIfError?: boolean
-  /**
-   * 页面销毁时自动取消请求
-   */
-  cancelOnUnmounted?: boolean
 }
 
 export interface CustomService<T, V> {
@@ -39,3 +35,8 @@ export interface CustomAxiosRequestConfig<T> {
 }
 
 export type UseAxiosService<T, V> = string | CustomAxiosRequestConfig<T> | CustomService<T, V>
+
+export interface UseAxiosState {
+  loading: boolean
+  error: Error | null
+}
