@@ -16,7 +16,7 @@ function bindSubmit<T extends object>({ onCreate, onUpdate }: GeneralFormOptions
   return (data, mode) => (mode === 'new' ? onCreate(data) : onUpdate(data))
 }
 
-export function useForm<T extends object>(options: UseFormOptions<T>): UseFormInstance<T> {
+export function useForm<T extends object, R = unknown>(options: UseFormOptions<T, R>): UseFormInstance<T> {
   const initialState = options.data
   const {
     serialize = pick,
@@ -25,12 +25,14 @@ export function useForm<T extends object>(options: UseFormOptions<T>): UseFormIn
     onError = (err) => Promise.reject(err)
   } = options
 
-  const onSubmit = typeof (options as CustomFormOptions<T>).onSubmit
+  const onSubmit = typeof (options as CustomFormOptions<T>).onSubmit === 'function'
     ? (options as CustomFormOptions<T>).onSubmit
     : bindSubmit(options as GeneralFormOptions<T>)
 
   const modeRef = ref<FormMode>(options.mode || 'new')
   const loadingRef = ref(options.loading || false)
+
+  const rulesRef = ref(options.rules)
 
   const data = reactive(initialState())
   const keys: Array<keyof T> = Object.keys(data) as Array<keyof T>
@@ -79,6 +81,7 @@ export function useForm<T extends object>(options: UseFormOptions<T>): UseFormIn
     loading: loadingRef,
     mode: modeRef,
     data,
+    rules: rulesRef,
     submit,
     reset,
     toJSON

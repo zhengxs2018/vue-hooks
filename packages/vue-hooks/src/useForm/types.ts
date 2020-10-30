@@ -31,9 +31,10 @@ export interface Serialize<T extends object> {
   (payload: T, keys: Array<keyof T>): T
 }
 
-export interface BaseFormOptions<T extends object> {
+export interface BaseFormOptions<T extends object, R = unknown> {
   mode?: FormMode
   loading?: boolean | Ref<boolean>
+  rules?: R
   data: InitialState<T>
   serialize?: Serialize<T>
   onFetch?: FetchHandler<T>
@@ -41,25 +42,26 @@ export interface BaseFormOptions<T extends object> {
   onError?: (error: Error) => Promise<unknown> | never
 }
 
-export interface CustomFormOptions<T extends object> extends BaseFormOptions<T> {
+export interface CustomFormOptions<T extends object, R = unknown> extends BaseFormOptions<T, R> {
   onSubmit: SubmitHandler<T>
 }
 
-export interface GeneralFormOptions<T extends object> extends BaseFormOptions<T> {
+export interface GeneralFormOptions<T extends object, R = unknown> extends BaseFormOptions<T, R> {
   onCreate: CreateHandler<T>
   onUpdate: UpdateHandler<T>
 }
 
-export type UseFormOptions<T extends object> = GeneralFormOptions<T> | CustomFormOptions<T>
+export type UseFormOptions<T extends object, R = unknown> = GeneralFormOptions<T, R> | CustomFormOptions<T, R>
 
 export interface ResetOptions {
   mode?: FormMode
 }
 
-export interface UseFormInstance<T extends object> {
+export interface UseFormInstance<T extends object, R = unknown> {
   loading: Ref<boolean>
   mode: Ref<FormMode>
   data: UnwrapNestedRefs<T>
+  rules?: R
   submit(): Promise<void>
   reset(options?: ResetOptions): Promise<void>
   toJSON(): T
